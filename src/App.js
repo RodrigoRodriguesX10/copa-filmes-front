@@ -6,10 +6,13 @@ import Selecao from "./Views/Selecao";
 import Resultado from "./Views/Resultado";
 
 function App() {
+  var fadeOut = "";
+  const calcularResultado = function(filmes){
+
+  }
   return (
     <div className="App">
-      <Selecao></Selecao>
-      <Resultado></Resultado>
+      <Selecao className={fadeOut}></Selecao>
     </div>
   );
 }

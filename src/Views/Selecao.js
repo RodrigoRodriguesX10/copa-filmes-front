@@ -23,8 +23,10 @@ export default class Selecao extends Component {
             <Header>Seleção {this.state.count}/8</Header>
             <form>
                 {this.state.filmes.map(f => <div key={f.id}>
-                    <input type="checkbox" onChange={({ target }) =>
-                        console.log(target) || this.setState({ count: target.checked ? this.state.count + 1 : this.state.count - 1 })} /> <label>{f.titulo}</label>
+                    <input name="filme" id={"i" + f.id} type="checkbox" onChange={({ target }) =>
+                        this.setState({ count: target.checked ? this.state.count + 1 : this.state.count - 1 })
+                        } /> 
+                        <label for={"i" + f.id}>{f.titulo}</label>
                 </div>)}
                 <button disabled={this.state.count != 8} onClick={() => this.setState({ resultado: true })}>Gerar resultado</button>
             </form>

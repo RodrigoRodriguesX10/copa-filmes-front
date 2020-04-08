@@ -1,5 +1,10 @@
 import React, { Component } from "react";
+import FilmesApi from "../Util/FilmeApi";
 
 export default class Resultado extends Component {
-    render = () => <h1>Resultado</h1>
+    render = () => (<div>
+        <h1>Resultado</h1>
+        <div>Vencedor: </div><br />
+        <div>Vice-Vencedor: </div>
+    </div>)
 }
