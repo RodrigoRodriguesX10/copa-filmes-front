@@ -28,7 +28,7 @@ export default class Selecao extends Component {
                         } /> 
                         <label for={"i" + f.id}>{f.titulo}</label>
                 </div>)}
-                <button disabled={this.state.count != 8} onClick={() => this.setState({ resultado: true })}>Gerar resultado</button>
+                <button disabled={this.state.count != 8} onClick={this.props.onFilmesSelected(this.state.filmes)}>Gerar resultado</button>
             </form>
         </div>);
     }

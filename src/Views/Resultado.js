@@ -1,10 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import FilmesApi from "../Util/FilmeApi";
 
-export default class Resultado extends Component {
-    render = () => (<div>
+function Resultado({ filmes }) {
+    if (!filmes) throw new Error("O parâmetro filmes é obrigatório");
+
+    return (<div>
         <h1>Resultado</h1>
         <div>Vencedor: </div><br />
         <div>Vice-Vencedor: </div>
-    </div>)
+    </div>);
 }
+
+export default Resultado;

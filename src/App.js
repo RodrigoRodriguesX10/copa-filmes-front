@@ -7,12 +7,12 @@ import Resultado from "./Views/Resultado";
 
 function App() {
   var fadeOut = "";
-  const calcularResultado = function(filmes){
-
+  const calcularResultado = function (filmes) {
+    
   }
   return (
     <div className="App">
-      <Selecao className={fadeOut}></Selecao>
+      <Selecao onFilmesSelected={calcularResultado} className={fadeOut}></Selecao>
     </div>
   );
 }
