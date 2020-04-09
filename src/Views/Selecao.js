@@ -7,6 +7,7 @@ export default class Selecao extends Component {
     constructor() {
         super();
         this.state = { filmes: [], count: 0, resultado: false };
+        this.onFilmesSelected = () => this.props.onFilmesSelected(this.state.filmes);
     }
 
     componentDidMount = async () => {
@@ -21,15 +22,15 @@ export default class Selecao extends Component {
         if (this.state.resultado) return <Resultado></Resultado>
         return (<div>
             <Header>Seleção {this.state.count}/8</Header>
-            <form>
+            <div className="form">
                 {this.state.filmes.map(f => <div key={f.id}>
                     <input name="filme" id={"i" + f.id} type="checkbox" onChange={({ target }) =>
                         this.setState({ count: target.checked ? this.state.count + 1 : this.state.count - 1 })
                         } /> 
-                        <label for={"i" + f.id}>{f.titulo}</label>
+                        <label htmlFor={"i" + f.id}>{f.titulo}</label>
                 </div>)}
-                <button disabled={this.state.count != 8} onClick={this.props.onFilmesSelected(this.state.filmes)}>Gerar resultado</button>
-            </form>
+                <button disabled={this.state.count != 8} onClick={this.onFilmesSelected}>Gerar resultado</button>
+            </div>
         </div>);
     }
 }
