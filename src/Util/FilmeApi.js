@@ -5,17 +5,14 @@ async function makeRequest({ url, method, body }) {
     let status = 200;
     var r = await fetch(Configuration.urlApi + "/" + url, {
         method: method,
-        body: method !== "GET" ? body : undefined
+        body: method !== "GET" ? body : undefined,
+        headers: {
+            "Content-Type": "application/json"
+        }
     });
     status = r.status;
     var data = await r.json();
-    if (status !== 200) {
-        var event = new Event("ErroRequest");
-        event.error = data;
-        window.dispatchEvent(event);
-        return null;
-    }
-    return data;
+    return { status, data };
 }
 
 class FilmeAPI {
@@ -34,9 +31,9 @@ class FilmeAPI {
 
     async criarCompeticao(filmes) {
         return await makeRequest({
-            url: this._controller,
+            url: this._controller + "/criarCompeticao",
             method: "POST",
-            body: { filmes }
+            body: JSON.stringify({ filmes })
         });
     }
 }

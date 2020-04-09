@@ -10,17 +10,17 @@ function App() {
   const [selecao, setSelecao] = useState(SlidePosition.IN);
   const [resultado, setResultado] = useState(SlidePosition.INITIAL);
   const [filmes, setFilmes] = useState([]);
-  
-  const calcularResultado = function (filmes) {
-    console.log("Clicou: ", filmes);
+
+  const calcularResultado = function (selecionados) {
+    console.log("Clicou: ", selecionados);
+    var selected = Array.from(selecionados);
     setSelecao(SlidePosition.OUT);
     setResultado(SlidePosition.IN);
-    setFilmes(filmes);
+    setFilmes(selected);
   };
 
   return (
     <div className="App">
-      {selecao} - {resultado}
       <SlidePage position={selecao}>
         <Selecao onFilmesSelected={calcularResultado} className={fadeOut}></Selecao>
       </SlidePage>

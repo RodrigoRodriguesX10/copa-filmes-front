@@ -1,35 +1,43 @@
 import React, { Component } from "react";
 import Header from "../Components/Header";
-import FilmesAPI from "../Util/FilmeApi"
-import Resultado from "./Resultado";
+import FilmesAPI from "../Util/FilmeApi";
 
 export default class Selecao extends Component {
     constructor() {
         super();
-        this.state = { filmes: [], count: 0, resultado: false };
-        this.onFilmesSelected = () => this.props.onFilmesSelected(this.state.filmes);
+        this.state = { filmes: [], count: 0, selecionados: new Set() };
+        this.onFilmesSelected = () => this.props.onFilmesSelected(this.state.selecionados);
     }
 
     componentDidMount = async () => {
         var data = await FilmesAPI.getAll().catch(e =>
             alert("Não foi possível acessar o servidor para listar os filmes")
         );
-        console.log(data);
-        this.setState({ filmes: data || [] });
+        if (data.status == 200)
+            this.setState({ filmes: data.data || [] });
     }
 
     render() {
-        if (this.state.resultado) return <Resultado></Resultado>
         return (<div>
-            <Header>Seleção {this.state.count}/8</Header>
+            <Header title="Fase de Seleção"
+                subtitle="Selecione 8 filmes que deseja que entrem na competição e depois clique no botão Gerar Resultado"></Header>
             <div className="form">
-                {this.state.filmes.map(f => <div key={f.id}>
-                    <input name="filme" id={"i" + f.id} type="checkbox" onChange={({ target }) =>
-                        this.setState({ count: target.checked ? this.state.count + 1 : this.state.count - 1 })
-                        } /> 
-                        <label htmlFor={"i" + f.id}>{f.titulo}</label>
-                </div>)}
+                <h2>Seleção {this.state.count}/8</h2>
                 <button disabled={this.state.count != 8} onClick={this.onFilmesSelected}>Gerar resultado</button>
+                <div className="board-selector">
+
+                    {this.state.filmes.map(f => <div key={f.id}>
+                        <input name="filme" id={"i" + f.id} type="checkbox" onChange={({ target }) => {
+                            target.checked ? this.state.selecionados.add(f.id) : this.state.selecionados.delete(f.id);
+                            this.setState({
+                                count: target.checked ? this.state.count + 1 : this.state.count - 1
+                            });
+                        }
+                        } />
+                        <label htmlFor={"i" + f.id}>{f.titulo}</label>
+                    </div>)}
+                </div>
+
             </div>
         </div>);
     }

@@ -1,3 +1,7 @@
+body {
+  background-color: #999;
+}
+
 .slide-box {
   position: absolute;
   top: 0;
@@ -7,7 +11,12 @@
   left: 0;
   opacity: 0;
   visibility: hidden;
-  transition: all 2s ease;
+  transition: all 1.5s ease;
+}
+
+.slide-box .content {
+  margin: 4px;
+  padding: 20px;
 }
 
 .slide-box-in {
@@ -18,4 +27,97 @@
 
 .slide-box-out {
   transform: translate3d(-100%, 0, 0);
+}
+
+.board-selector{
+  position: initial;
+}
+
+.box-header {
+  border-width: 1px;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  border-color: #000;
+  border-style: solid;
+  background-color: #666;
+  padding: 20px;
+  color: #fff;
+}
+
+.message-error{
+  color: red;
+  font-size: large;
+}
+
+.header-app-title {
+  font-size: 12px;
+  color: #777;
+  text-transform: uppercase;
+}
+
+.header-title {
+  position: initial;
+}
+
+.header-title > h1 {
+  margin: 5px;
+}
+
+.header-subtitle{
+  position: initial;
+}
+
+
+/*Thanks Aditya: https://medium.com/claritydesignsystem/pure-css-accessible-checkboxes-and-radios-buttons-54063e759bb3/*/
+.checkbox input[type="checkbox"] {
+  opacity: 0;
+}
+
+.checkbox label {
+  position: relative;
+  display: inline-block;
+  padding-left: 22px;
+}
+
+.checkbox label::before,
+.checkbox label::after {
+  position: absolute;
+  content: "";
+  /*Needed for the line-height to take effect*/
+  display: inline-block;
+}
+
+/*Outer box of the fake checkbox*/
+.checkbox label::before{
+  height: 25px;
+  width: 25px;
+  border: 1px solid;
+  left: 0px;
+  /*(24px line-height - 16px height of fake checkbox) / 2 - 1px for the border
+   *to vertically center it.
+   */
+  top: 3px;
+}
+/*Checkmark of the fake checkbox*/
+.checkbox label::after {
+  height: 9px;
+  width: 16px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  transform: rotate(-45deg);
+  left: 4px;
+  top: 7px;
+}
+/*Hide the checkmark by default*/
+.checkbox input[type="checkbox"] + label::after {
+  content: none;
+}
+/*Unhide on the checked state*/
+.checkbox input[type="checkbox"]:checked + label::after {
+  content: "";
+}
+/*Adding focus styles on the outer-box of the fake checkbox*/
+.checkbox input[type="checkbox"]:focus + label::before {
+  outline: rgb(59, 153, 252) auto 5px;
 }

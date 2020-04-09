@@ -34,7 +34,6 @@ export default class SlidePage extends Component {
     }
 
     render = () => <div className={"slide-box " + this.state.className}>
-        <h1>Posicao: {this.props.position}</h1>
         {this.props.children}
     </div>
 }
