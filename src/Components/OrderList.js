@@ -27,5 +27,3 @@ export function Item(props) {
         </div>
     )
 }
-
-Item.prototype.setOrder = function (o) { this.order = o; }
