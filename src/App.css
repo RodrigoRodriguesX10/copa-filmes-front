@@ -1,5 +1,6 @@
 body {
   background-color: #999;
+  font-family: 'Open Sans';
 }
 
 .slide-box {
@@ -11,6 +12,7 @@ body {
   left: 0;
   opacity: 0;
   visibility: hidden;
+  overflow: auto;
   transition: all 1s ease;
 }
 
@@ -30,19 +32,18 @@ body {
 }
 
 .board-selector{
-  position: initial;
+  overflow-y: auto;
 }
 
 .box-header {
-  border-width: 1px;
   align-items: center;
   align-content: center;
   text-align: center;
-  border-color: #000;
-  border-style: solid;
   background-color: #666;
   padding: 20px;
+  min-height: 200px;
   color: #fff;
+  display: grid;
 }
 
 .message-error{
@@ -52,7 +53,7 @@ body {
 
 .header-app-title {
   font-size: 12px;
-  color: #777;
+  color: #999;
   text-transform: uppercase;
 }
 
@@ -64,12 +65,8 @@ h1, h2, h3, h4, h5{
   color: #fff;
 }
 
-.header-title > h1 {
-  margin: 5px;
-}
-
 .header-subtitle{
-  position: initial;
+  padding: 5px;
 }
 
 .checkbox-group {
@@ -78,9 +75,6 @@ h1, h2, h3, h4, h5{
 }
 
 .checkbox-group .checkbox {
-  border-width: 1px;
-  border-style: solid;
-  border-color: #333;
   background-color: #EEE;
   margin: 5px;
   padding: 15px;
@@ -104,13 +98,56 @@ h1, h2, h3, h4, h5{
   height: 50px;
   font-weight: bold;
   color: #fff;
+  padding: 0px 15px;
+  box-shadow: #4444AA 1px 2px 3px;
   background-color: steelblue;
-  border: 1px solid #fff;
+  border: 0px none;
 }
 
 .ano-filme {
   font-size: 12px;
   padding-left: 35px;
+}
+
+/* ORDER LIST */
+.order-list {
+  display: grid;
+}
+
+.order-list .order-list-item {
+  margin-top: 15px;
+}
+
+.order-list-item{
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
+.order-list-item .item-number {
+  align-items: center;
+  background-color: #666;
+  color: #fff;
+  display: flex;
+  font-family: 'Roboto';
+  font-size: 32px;
+  height: 100%;
+  padding: 0px 15px;
+  position: relative;
+}
+
+.order-list-item .item-content {
+  padding-left: 15px;
+  background-color: #EEE;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.item-content span {
+  font-size: 16px;
+  font-family: 'Open Sans';
 }
 
 /*Thanks Aditya: https://medium.com/claritydesignsystem/pure-css-accessible-checkboxes-and-radios-buttons-54063e759bb3/*/
@@ -140,12 +177,10 @@ h1, h2, h3, h4, h5{
 .checkbox label::before{
   height: 22px;
   width: 22px;
-  border: 1px solid;
   left: 0px;
-  /*(24px line-height - 16px height of fake checkbox) / 2 - 1px for the border
-   *to vertically center it.
-   */
+  border: 1px solid #000;
 }
+
 /*Checkmark of the fake checkbox*/
 .checkbox label::after {
   height: 9px;
@@ -157,6 +192,7 @@ h1, h2, h3, h4, h5{
   left: 3px;
   top: 2px;
 }
+
 /*Hide the checkmark by default*/
 .checkbox input[type="checkbox"] + label::after {
   content: none;

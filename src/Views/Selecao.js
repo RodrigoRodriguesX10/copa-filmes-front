@@ -11,11 +11,13 @@ export default class Selecao extends Component {
     }
 
     componentDidMount = async () => {
-        var data = await FilmesAPI.getAll().catch(e =>
+        try {
+            var data = await FilmesAPI.getAll();
+            if (data.status === 200)
+                this.setState({ filmes: data.data || [] });
+        } catch (e) {
             alert("Não foi possível acessar o servidor para listar os filmes")
-        );
-        if (data.status == 200)
-            this.setState({ filmes: data.data || [] });
+        }
     }
 
     updateSelector = (selected) => {
@@ -29,7 +31,7 @@ export default class Selecao extends Component {
             <div>
                 <div className="form-header">
                     <h2>Selecionados <br /> {this.state.count} de 8</h2>
-                    <button className="botao-resultado" disabled={this.state.count != 8} onClick={this.onFilmesSelected}>Gerar resultado</button>
+                    <button className="botao-resultado" disabled={this.state.count !== 8} onClick={this.onFilmesSelected}>Gerar resultado</button>
                 </div>
                 <div className="board-selector">
                     <div className="checkbox-group">

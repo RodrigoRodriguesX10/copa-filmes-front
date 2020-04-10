@@ -17,6 +17,8 @@ export default class SlidePage extends Component {
             case SlidePosition.OUT:
                 this.state.className = "slide-box-out";
                 break;
+            default:
+                break;
         }
     }
 
@@ -29,12 +31,13 @@ export default class SlidePage extends Component {
                     return this.setState({ className: "slide-box-out" });
                 case SlidePosition.INITIAL:
                     return this.setState({ className: "" });
+                default: break;
             }
         }
     }
-
+    /* defer content until position get IN */
     render = () => <div className={"slide-box " + this.state.className}>
-        {this.props.children}
+        {SlidePosition.INITIAL === this.props.position ? "" : this.props.children}
     </div>
 }
 
