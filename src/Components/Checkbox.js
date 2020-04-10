@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 
 export default class Checkbox extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.onChange = ({target}) => {
-            this.props.options.add(this.props.key);
+        this.onChange = ({ target }) => {
+            target.checked ?
+                this.props.options.add(this.props.id) :
+                this.props.options.delete(this.props.id);
             this.props.onSelect(this.props.options);
         }
     }
-    render = () => <div className="checkbox-option">
-        <input id={"checkbox"+this.props.key} class="checkbox" type="checkbox" onChange={this.onChange}></input>
-        <label for={"checkbox"+this.props.key}>{this.props.label}</label>
+    render = () => <div className="checkbox">
+        <input id={"checkbox" + this.props.id}  type="checkbox" onChange={this.onChange}></input>
+        <label title={this.props.label} htmlFor={"checkbox" + this.props.id}>
+            <span>{this.props.label}</span></label>
+        {this.props.children}
     </div>
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "../Components/Header";
 import FilmesAPI from "../Util/FilmeApi";
+import Checkbox from "../Components/Checkbox";
 
 export default class Selecao extends Component {
     constructor() {
@@ -17,25 +18,29 @@ export default class Selecao extends Component {
             this.setState({ filmes: data.data || [] });
     }
 
+    updateSelector = (selected) => {
+        this.setState({ count: selected.size, selecionados: selected })
+    }
+
     render() {
-        return (<div>
+        return (<div className="content">
             <Header title="Fase de Seleção"
                 subtitle="Selecione 8 filmes que deseja que entrem na competição e depois clique no botão Gerar Resultado"></Header>
             <div className="form">
-                <h2>Seleção {this.state.count}/8</h2>
+                <h2>Selecionados <br/> {this.state.count} de 8</h2>
                 <button disabled={this.state.count != 8} onClick={this.onFilmesSelected}>Gerar resultado</button>
                 <div className="board-selector">
-
-                    {this.state.filmes.map(f => <div key={f.id}>
-                        <input name="filme" id={"i" + f.id} type="checkbox" onChange={({ target }) => {
-                            target.checked ? this.state.selecionados.add(f.id) : this.state.selecionados.delete(f.id);
-                            this.setState({
-                                count: target.checked ? this.state.count + 1 : this.state.count - 1
-                            });
-                        }
-                        } />
-                        <label htmlFor={"i" + f.id}>{f.titulo}</label>
-                    </div>)}
+                    <div className="checkbox-group">
+                        {this.state.filmes.map(f =>
+                            <Checkbox
+                                options={this.state.selecionados}
+                                label={f.titulo}
+                                id={f.id}
+                                key={f.id}
+                                onSelect={this.updateSelector} >
+                                    <span className="ano-filme">{f.ano}</span>
+                                </Checkbox>)}
+                    </div>
                 </div>
 
             </div>

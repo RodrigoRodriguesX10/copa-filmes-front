@@ -3,7 +3,7 @@ body {
 }
 
 .slide-box {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100vw;
   height: 100%;
@@ -11,7 +11,7 @@ body {
   left: 0;
   opacity: 0;
   visibility: hidden;
-  transition: all 1.5s ease;
+  transition: all 1s ease;
 }
 
 .slide-box .content {
@@ -47,7 +47,7 @@ body {
 
 .message-error{
   color: red;
-  font-size: large;
+  font-size: 20px;
 }
 
 .header-app-title {
@@ -68,16 +68,46 @@ body {
   position: initial;
 }
 
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.checkbox-group .checkbox {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #333;
+  background-color: #EEE;
+  margin: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.checkbox-group label > span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ano-filme {
+  font-size: 12px;
+  padding-left: 35px;
+}
 
 /*Thanks Aditya: https://medium.com/claritydesignsystem/pure-css-accessible-checkboxes-and-radios-buttons-54063e759bb3/*/
+
 .checkbox input[type="checkbox"] {
-  opacity: 0;
+  display: none;
 }
 
 .checkbox label {
+  font-weight: bold;
   position: relative;
-  display: inline-block;
-  padding-left: 22px;
+  display: flex;
+  padding-left: 35px;
+  font-size: 16px;
 }
 
 .checkbox label::before,
@@ -86,28 +116,29 @@ body {
   content: "";
   /*Needed for the line-height to take effect*/
   display: inline-block;
+  background-color: #fff;
 }
 
 /*Outer box of the fake checkbox*/
 .checkbox label::before{
-  height: 25px;
-  width: 25px;
+  height: 22px;
+  width: 22px;
   border: 1px solid;
   left: 0px;
   /*(24px line-height - 16px height of fake checkbox) / 2 - 1px for the border
    *to vertically center it.
    */
-  top: 3px;
 }
 /*Checkmark of the fake checkbox*/
 .checkbox label::after {
   height: 9px;
-  width: 16px;
+  width: 18px;
+  background-color: transparent;
   border-left: 2px solid;
   border-bottom: 2px solid;
   transform: rotate(-45deg);
-  left: 4px;
-  top: 7px;
+  left: 3px;
+  top: 2px;
 }
 /*Hide the checkmark by default*/
 .checkbox input[type="checkbox"] + label::after {
