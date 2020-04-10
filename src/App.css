@@ -60,6 +60,10 @@ body {
   position: initial;
 }
 
+h1, h2, h3, h4, h5{
+  color: #fff;
+}
+
 .header-title > h1 {
   margin: 5px;
 }
@@ -79,16 +83,29 @@ body {
   border-color: #333;
   background-color: #EEE;
   margin: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 15px;
 }
 
 .checkbox-group label > span {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.form-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-header button {
+  text-transform: uppercase;
+  height: 50px;
+  font-weight: bold;
+  color: #fff;
+  background-color: steelblue;
+  border: 1px solid #fff;
 }
 
 .ano-filme {

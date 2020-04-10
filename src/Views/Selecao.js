@@ -26,9 +26,11 @@ export default class Selecao extends Component {
         return (<div className="content">
             <Header title="Fase de Seleção"
                 subtitle="Selecione 8 filmes que deseja que entrem na competição e depois clique no botão Gerar Resultado"></Header>
-            <div className="form">
-                <h2>Selecionados <br/> {this.state.count} de 8</h2>
-                <button disabled={this.state.count != 8} onClick={this.onFilmesSelected}>Gerar resultado</button>
+            <div>
+                <div className="form-header">
+                    <h2>Selecionados <br /> {this.state.count} de 8</h2>
+                    <button className="botao-resultado" disabled={this.state.count != 8} onClick={this.onFilmesSelected}>Gerar resultado</button>
+                </div>
                 <div className="board-selector">
                     <div className="checkbox-group">
                         {this.state.filmes.map(f =>
@@ -38,8 +40,8 @@ export default class Selecao extends Component {
                                 id={f.id}
                                 key={f.id}
                                 onSelect={this.updateSelector} >
-                                    <span className="ano-filme">{f.ano}</span>
-                                </Checkbox>)}
+                                <span className="ano-filme">{f.ano}</span>
+                            </Checkbox>)}
                     </div>
                 </div>
 
