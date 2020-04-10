@@ -1,24 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+import Selecao from "./Views/Selecao";
+import Resultado from "./Views/Resultado";
+import SlidePage, { SlidePosition } from './Components/SlidePage';
+
 function App() {
+  var path = window.location.pathname;
+  const [selecao, setSelecao] = useState(path === "/resultado" ? SlidePosition.OUT : SlidePosition.IN);
+  const [resultado, setResultado] = useState(path === "/resultado" ? SlidePosition.IN : SlidePosition.INITIAL);
+  const [filmes, setFilmes] = useState([]);
+
+  window.onpopstate = function (event) {
+    changeState(window.location.pathname);
+  };
+
+  const changeState = function (state) {
+    switch (state) {
+      case "/resultado":
+        setSelecao(SlidePosition.OUT);
+        setResultado(SlidePosition.IN);
+        break;
+      default:
+        setSelecao(SlidePosition.IN);
+        setResultado(SlidePosition.INITIAL);
+        break;
+    }
+  }
+
+  const calcularResultado = function (selecionados) {
+    var selected = Array.from(selecionados);
+    window.history.pushState("", "", "/resultado");
+    changeState("/resultado");
+    setFilmes(selected);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SlidePage position={selecao}>
+        <Selecao onFilmesSelected={calcularResultado}></Selecao>
+      </SlidePage>
+      <SlidePage position={resultado}>
+        <Resultado className="Resultado" filmes={filmes}></Resultado>
+      </SlidePage>
     </div>
   );
 }
